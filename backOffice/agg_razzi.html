@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BackOffice - Aggiungi un razzo</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Mitr:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section id="modale" class="container-modale">
+        <div class="container-form-modale">
+            <div class="container-info-modale">
+                <h3>Modifica i dati del razzo</h3>
+                <p class="chiudi-modale" id="chiudiModale">&times;</p>
+            </div>
+            <form id="formModale">
+                <input type="hidden" id="razziIdModale">
+                <div class="container-voce-form">
+                    <label for="name">Name:</label>
+                    <input id="razziNameModale" type="text" placeholder="Inserisci il nome dell'Azienda...">
+                </div>
+                <div class="container-voce-form file-upload">
+                    <label for="logo">Logo:</label>
+                    <input id="razziLogoModale" type="file" >
+                </div>
+                <div class="container-voce-form">
+                    <label for="headquarters">Headquarters:</label>
+                    <input id="razziHeadquartersModale" type="text" placeholder="Inserisci la sede...">
+                </div>
+                <div class="container-voce-form">
+                    <label for="website">Website:</label>
+                    <input id="razziWebsiteModale" type="text" placeholder="Inserisci l'URL del sito originale'...">
+                </div>
+                <button type="submit" class="btn-backoffice" id="btnSalvaModifiche">Salva le modifiche</button>
+            </form>
+        </div>
+    </section>
+
+    <main id="main" class="">
+        <div class="container-pag-backoffice">
+            <a class="btn-backoffice" href="agg_company.html">Aggiungi un'Azienda</a>
+            <a class="btn-backoffice" href="agg_razzi.html">Aggiungi un razzo</a>
+        </div>
+        <h1>BackOffice - Aggiungi un razzo</h1>
+        <form id="formRazzo">
+            <div class="container-voce-form">
+                <label for="rocketName">Name:</label>
+                <input id="rocketName" type="text" placeholder="Inserisci il nome del razzo...">
+            </div>
+            <div class="container-voce-form file-upload">
+                <label for="rocketimage">Image:</label>
+                <input id="rocketimage" type="file" >
+            </div>
+            <div class="container-voce-form">
+                <label for="rocketCompany">Company:</label>
+                <input id="rocketCompany" type="text" placeholder="Inserisci l'azienda del razzo...">
+            </div>
+            <div class="container-voce-form">
+                <label for="rocketHeight">height:</label>
+                <input id="rocketHeight" type="number" placeholder="Inserisci l'altezza del razzo...">
+            </div>
+            <div class="container-voce-form">
+                <label for="rocketDiameter">Diameter:</label>
+                <input id="rocketDiameter" type="number" placeholder="Inserisci il diametro del razzo...">
+            </div>
+            <div class="container-voce-form">
+                <label for="rocketMass">Mass:</label>
+                <input id="rocketMass" type="number" placeholder="Inserisci la massa del razzo...">
+            </div>
+            <div class="container-voce-form">
+                <label for="rocketNumStages">Number of stages:</label>
+                <input id="rocketNumStages" type="number" placeholder="Inserisci il numero di stadi del razzo...">
+            </div>
+            <div class="container-voce-form">
+                <label for="rocketFirstStage">First stage engine:</label>
+                <div class="container-inp-doppi">
+                    <input id="rocketFirstStage" type="string" placeholder="Inserisci il nome dei motori del primo stadio...">
+                <input id="rocketFirstStageEngine" type="number" placeholder="Inserisci il numero di motori del primo stadio...">
+                </div>
+            </div>
+            <div class="container-voce-form">
+                <label for="rocketSecondStage">Second stage engine:</label>
+                <div class="container-inp-doppi">
+                    <input id="rocketSecondStage" type="string" placeholder="Inserisci il nome dei motori del secondo stadio...">
+                <input id="rocketSecondStageEngine" type="number" placeholder="Inserisci il numero di motori del secondo stadio...">
+                </div>
+            </div>
+            <div class="container-voce-form">
+                <label for="rocketThirdStage">Third stage engine:</label>
+                <div class="container inp-doppi">
+                    <input id="rocketThirdStage" type="string" placeholder="Inserisci il nome dei motori del terzo stadio...">
+                    <input id="rocketThirdStageEngine" type="number" placeholder="Inserisci il numero di motori del terzo stadio...">    
+                </div>
+            </div>
+            <button type="submit" class="btn-backoffice" id="btnCrea">Crea</button>
+        </form>
+        <section class="render-api" id="renderApi">
+
+        </section>
+    </main>
+
+
+</body>
+<script type="module" src="razziBackOffice.js"></script>
+</html>

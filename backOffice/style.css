@@ -1,0 +1,253 @@
+/*FONT:
+.michroma-regular {
+  font-family: "Michroma", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.mitr-extralight {
+  font-family: "Mitr", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.mitr-light {
+  font-family: "Mitr", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.mitr-regular {
+  font-family: "Mitr", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.mitr-medium {
+  font-family: "Mitr", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.mitr-semibold {
+  font-family: "Mitr", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.mitr-bold {
+  font-family: "Mitr", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+*/
+
+html, body, p, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Michroma", sans-serif;
+    position: relative;
+    
+}
+
+main {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    transition: all 1s cubic-bezier(.215, .61, .355, 1);
+}
+
+.container-pag-backoffice {
+    margin: 20px 0;
+}
+
+.btn-backoffice {
+    text-decoration: none;
+    padding: 10px 15px;
+    background-color: rebeccapurple;
+    border: none;
+    color: white;
+    border-radius: 5pt;
+    cursor: pointer;
+}
+
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.container-voce-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 5px 10px;
+}
+
+label {
+    font-weight: 700;
+}
+
+input {
+    width: 300px;
+    height: 30px;
+    border: 1px solid rebeccapurple;
+    border-radius: 5pt;
+}
+
+.file-upload {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+  
+.file-upload input[type="file"]::file-selector-button {
+    margin-top: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+#btnCrea {
+    cursor: pointer;
+}
+
+.render-api {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    max-width: 80%;
+}
+
+.card-backoffice {
+    border: 1px solid black;
+    border-radius: 5pt;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 400px;
+}
+
+.btn-elimina {
+    background-color: red;
+    cursor: pointer;
+}
+
+/* MODALE */
+#modale {
+    display: none;
+    position: sticky;
+    top: 100px;
+    z-index: 10;
+}
+
+.container-form-modale {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 30%;
+    position: absolute;
+    top: 15%;
+    right: 50%;
+    transform: translateX(50%);
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rebeccapurple;
+    border-radius: 10pt;
+    padding: 40px;
+}
+
+.blur {
+    filter: blur(2px);
+}
+
+.container-info-modale {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container-info-modale h3 {
+    color: rebeccapurple;
+}
+
+.container-info-modale p {
+    font-size: 2em;
+    cursor: pointer;
+    background-color: rebeccapurple;
+    padding: 0px 12px;
+    color: white;
+    border-radius: 25pt;
+}
+
+/*RAZZI BACKOFFICE - RAZZI BACKOFFICE - RAZZI BACKOFFICE - */
+/* #formRazzo {
+    display: flex;
+    align-items: center;
+
+} */
+
+
+
+
+
+
+/*MEDIA QUERIES*/
+@media only screen and (max-width: 480px) {
+    main {
+        padding: 15px;
+        gap: 15px;
+        max-width: 100vw;
+    }
+
+    .container-pag-backoffice {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    main h1 {
+        text-align: center;
+    }
+
+    .btn-backoffice {
+        padding: 5px 10px;
+        border-radius: 5pt;
+    }
+
+    .container-voce-form {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: start;
+        padding: 5px 10px;
+        gap: 10px;
+    }
+
+
+    .render-api {
+        flex-direction: column;
+        max-width: 90%;
+        margin: 0 auto;
+    }
+
+    .card-backoffice {
+        max-width: 350px;
+        padding: 10px;
+    }
+
+    .card-backoffice strong {
+        max-width: 320px;
+    }
+  }

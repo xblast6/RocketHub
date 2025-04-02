@@ -82,7 +82,8 @@ form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 20px;
+    border: 1px solid rebeccapurple;
+    border-radius: 10pt
 }
 
 .container-voce-form {
@@ -90,28 +91,31 @@ form {
     align-items: center;
     justify-content: space-between;
     gap: 30px;
-    padding: 5px 10px;
+    padding: 20px;
+    
+}
+
+.container-voce-form:hover {
+    background-color: rgb(191, 165, 218);
+}
+
+.container-voce-form:hover:nth-child(1) {
+    border-top-left-radius: 10pt;
+    border-top-right-radius: 10pt;
 }
 
 label {
     font-weight: 700;
 }
 
-input {
+input, #rocketCompany {
     width: 300px;
     height: 30px;
     border: 1px solid rebeccapurple;
     border-radius: 5pt;
 }
-
-.file-upload {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-}
   
-.file-upload input[type="file"]::file-selector-button {
+.container-voce-form input[type="file"]::file-selector-button {
     margin-top: 5px;
     margin-left: 5px;
     cursor: pointer;
@@ -119,6 +123,7 @@ input {
 
 #btnCrea {
     cursor: pointer;
+    margin: 10px;
 }
 
 .render-api {
@@ -192,13 +197,21 @@ input {
 }
 
 /*RAZZI BACKOFFICE - RAZZI BACKOFFICE - RAZZI BACKOFFICE - */
-/* #formRazzo {
+#formRazzo {
     display: flex;
-    align-items: center;
+    border: 1px solid rebeccapurple;
+    border-radius: 10pt;
+}
 
-} */
+.container-inp-doppi {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
-
+.divisore {
+    border-bottom: 1px solid rebeccapurple;
+}
 
 
 

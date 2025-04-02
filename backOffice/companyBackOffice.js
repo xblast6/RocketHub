@@ -27,7 +27,7 @@ async function fetchCompanies() {
     const companies = await response.json();
     renderCompanies(companies);
 }
-// Creazione dell' azienda tramitte form
+// Creazione dell' azienda
 mainForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -206,7 +206,7 @@ async function updateCompany(id, updatedData) {
         }
         fetchCompanies()
         main.classList.remove("blur")
-    } catch(error) {
+    } catch (error) {
         console.error("Errore durante la modifica:", error);
     }
 }

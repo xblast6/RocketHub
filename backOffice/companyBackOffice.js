@@ -21,12 +21,18 @@ async function uploadImage(file) {
     if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
     return await response.json();
 }
+
 // Fetch aziende
-async function fetchCompanies() {
-    const response = await fetch(urlCompanies);
-    const companies = await response.json();
-    renderCompanies(companies);
+function fetchCompanies() {
+    fetch(urlCompanies)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            renderCompanies(data);
+        })
+        .catch(err => console.log("Errore: ", err))
 }
+
 // Creazione dell' azienda
 mainForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -66,9 +72,14 @@ mainForm.addEventListener("submit", async (e) => {
             website: companyWebsite,
         };
 
+        const token = localStorage.getItem("adminToken");
+
         const response = await fetch(urlCompanies, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token 
+            },
             body: JSON.stringify(payload),
         });
 
@@ -146,12 +157,16 @@ function eventiBtn() {
 // funzione elimina
 async function deleteCompany(id) {
     try {
+        const token = localStorage.getItem("adminToken");
         const response = await fetch(urlCompanies + "/" + id, {
             method: "DELETE",
+            headers: {
+                "Authorization": "Bearer " + token
+            }
         })
         if (!response.ok) {
             const errorData = await response.json()
-            throw new Error("ERRORE: ${response.status} - ${errorData.error}")
+            throw new Error(`ERRORE: ${response.status} - ${errorData.error}`)
         }
         fetchCompanies();
     } catch (error) {
@@ -195,14 +210,18 @@ document.getElementById("formModale").addEventListener("submit", async (e) => {
 
 async function updateCompany(id, updatedData) {
     try {
+        const token = localStorage.getItem("adminToken");
         const response = await fetch(urlCompanies + "/" + id, {
             method: "PATCH",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
             body: JSON.stringify(updatedData)
         })
         if (!response.ok) {
             const errorData = await response.json()
-            throw new Error("ERRORE: ${response.status} - ${errorData.error}")
+            throw new Error(`ERRORE: ${response.status} - ${errorData.error}`)
         }
         fetchCompanies()
         main.classList.remove("blur")

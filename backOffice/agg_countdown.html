@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BackOffice - Aggiungi un'azienda</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Mitr:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main id="main" class="">
+        <div class="container-pag-backoffice">
+            <a class="btn-backoffice" href="agg_company.html">Aggiungi un'Azienda</a>
+            <a class="btn-backoffice" href="agg_razzi.html">Aggiungi un razzo</a>
+            <a class="btn-backoffice" href="agg_countdown.html">Aggiungi un countdown</a>
+        </div>
+        <h1>BackOffice - Aggiungi un countdown</h1>
+        <form id="countdownForm">
+            <div class="container-voce-form">
+                <label for="inpRocket">Rocket:</label>
+                <select name="inpRocket" id="inpRocket">
+
+                </select>
+            </div>
+
+            <div class="container-voce-form">
+                <label for="inpCompany">Company:</label>
+                <select name="inpCompany" id="inpCompany">
+                    
+                </select>
+            </div>
+
+            <div class="container-voce-form">
+                <label for="launchSite">Launch SIte:</label>
+                <input type="text" placeholder="Inserisci il sito di lancio...">
+            </div>
+
+            <div class="container-voce-form">
+                <label for="inpLaunchSite">Status: </label>
+                <select name="inpLaunchSite" id="inpLaunchSite">
+                    <option value="attivo">Attivo</option>
+                    <option value="in pausa">In pausa</option>
+                    <option value="cancellato">Cancellato</option>
+                </select>
+            </div>
+
+            <div class="container-voce-form">
+                <label for="launchDate">Launch Date:</label>
+                <input type="date" >
+            </div>
+
+            <div class="container-voce-form">
+                <label for="description">Description:</label>
+                <input type="text" placeholder="Inserisci la descrizione del lancio...">
+            </div>
+
+            <div class="container-voce-form">
+                <label for="liveStreamUrl">URL Live:</label>
+                <input type="text" placeholder="Inserisci L'Url della live del lancio...">
+            </div>
+
+            <button type="submit" class="btn-backoffice">Crea</button>
+        </form>
+
+        <section class="render-api" id="renderApi">
+
+        </section>
+    </main>
+
+
+</body>
+<script type="module" src="countdownBackoffice.js"></script>
+</html>

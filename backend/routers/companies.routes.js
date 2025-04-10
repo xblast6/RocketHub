@@ -4,7 +4,7 @@ import rocketsRouter from "./rockets.routes.js";
 
 const router = express.Router();
 
-// GET: Lista aziende
+// GET Lista aziende
 router.get("/", async (req, res, next) => {
   try {
     const companiesList = await Company.find();
@@ -14,7 +14,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// GET: Azienda singola
+// GET Azienda singola
 router.get("/:id", async (req, res, next) => {
   try {
     const company = await Company.findById(req.params.id);
@@ -27,7 +27,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-// POST: Nuova azienda
+// POST Nuova azienda
 router.post("/", async (req, res, next) => {
   try {
     const newCompany = new Company(req.body);
@@ -42,7 +42,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-// PATCH: Modifica azienda
+// PATCH Modifica azienda
 router.patch("/:id", async (req, res, next) => {
   try {
     const updatedCompany = await Company.findByIdAndUpdate(
@@ -59,7 +59,7 @@ router.patch("/:id", async (req, res, next) => {
   }
 });
 
-// DELETE: Elimina azienda
+// DELETE Elimina azienda
 router.delete("/:id", async (req, res, next) => {
   try {
     const deletedCompany = await Company.findByIdAndDelete(req.params.id);

@@ -49,42 +49,68 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Fetch upload img
 async function uploadImage(file) {
+    const token = localStorage.getItem("adminToken");
     const formData = new FormData();
     formData.append("image", file);
+
     const response = await fetch("http://localhost:5010/upload", {
         method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
         body: formData,
     });
+    
     if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
     return await response.json();
 }
 
+
 //fetch razzi
 function fetchRockets() {
-    fetch(urlRockets)
-    .then(res => res.json())
-    .then(data => {
-        console.log(data);
-        renderRockets(data)
+    const token = localStorage.getItem("adminToken");
+    fetch(urlRockets, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
     })
+        .then(res => {
+            if (!res.ok) return res.json().then(err => Promise.reject(err));
+            return res.json();
+        })
+        .then(data => {
+            console.log(data);
+            renderRockets(data);
+        })
+        .catch(err => console.log("Errore: ", err));
 }
+
 //fetch aziende
 function fetchCompanies() {
-    fetch(urlCompanies)
-    .then(res => res.json())
-    .then(data => {
-        console.log(data);
-        rocketCompanyOption(inpRocketCompany, data)
-        rocketCompanyOption(inpRocketCompanyModale, data)
+    const token = localStorage.getItem("adminToken");
+    fetch(urlCompanies, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
     })
-    .catch(err => console.log("Errore: ", err))
+        .then(res => {
+            if (!res.ok) return res.json().then(err => Promise.reject(err));
+            return res.json();
+        })
+        .then(data => {
+            console.log(data);
+            rocketCompanyOption(inpRocketCompany, data);
+            rocketCompanyOption(inpRocketCompanyModale, data);
+        })
+        .catch(err => console.log("Errore GET aziende: ", err));
 }
+
 
 function rocketCompanyOption(selectElement, companies) {
     companies.forEach(company => {
         const option = document.createElement("option")
-        option.value=company._id
-        option.textContent=company.name
+        option.value = company._id
+        option.textContent = company.name
         selectElement.appendChild(option);
     });
 }
@@ -154,10 +180,10 @@ form.addEventListener("submit", async (e) => {
         return
     }
 
-    
+
 
     try {
-        const imageData = await uploadImage(rocketimage); 
+        const imageData = await uploadImage(rocketimage);
         const payload = {
             name: rocketName,
             image: imageData.url,
@@ -194,12 +220,13 @@ form.addEventListener("submit", async (e) => {
         const token = localStorage.getItem("adminToken");
         const response = await fetch(urlRockets, {
             method: "POST",
-            headers: {"Content-Type": "application/json",
-                    "Authorization": "Bearer " + token
-             },
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
             body: JSON.stringify(payload),
         });
-        
+
         if (!response.ok) {
             const errorData = await response.json();
             throw new Error(`Errore HTTP: ${response.status} - ${errorData.error}`);
@@ -218,7 +245,7 @@ form.addEventListener("submit", async (e) => {
         inpRocketThirdStage.value = ""
         inpRockrocketThirdStageEngine.value = ""
         inpRocketThirdStageOpzionale.value = ""
-        
+
         fetchRockets()
     } catch (error) {
         console.error(error);
@@ -271,7 +298,7 @@ function renderRockets(data) {
                 <button class="btn-backoffice btn-elimina" data-id="${razzo._id}">Elimina</button>
             </div>
         `
-        renderApi.appendChild(cardRocket) 
+        renderApi.appendChild(cardRocket)
     });
     eventiBtn();
 }
@@ -368,7 +395,7 @@ formModale.addEventListener("submit", async (e) => {
 
 
 
-//Funzione per prendere gli eventi modifica ed elimina
+//eventi modifica ed elimina
 function eventiBtn() {
     document.querySelectorAll(".btn-modifica").forEach(btn => {
         btn.addEventListener("click", (e) => {
@@ -387,7 +414,7 @@ function eventiBtn() {
             const thirdStageEngineName = button.dataset.thirdStageEngineName;
             const thirdStageEngineCount = button.dataset.thirdStageEngineCount;
 
-            // Precompila i campi del modale
+            // campi del modale
             document.getElementById("razziIdModale").value = id;
             inpRocketNameModale.value = name;
             inpRocketCompanyModale.value = company;
@@ -441,7 +468,13 @@ async function deleteRocket(id) {
             throw new Error(`ERRORE: ${response.status} - ${errorData.error}`)
         }
         fetchRockets()
-    }   catch (err) {
+    } catch (err) {
         console.log("Errore nell'eliminazione: " + err);
     }
 }
+
+const btnLogout = document.getElementById("btnLogout")
+btnLogout.addEventListener("click", () => {
+    localStorage.removeItem('adminToken');
+    window.location.href = 'index.html';
+})

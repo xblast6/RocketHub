@@ -7,11 +7,6 @@ const CountdownSchema = new mongoose.Schema (
             ref: "Rocket",
             required: true
         },
-        company: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Company",
-            required: true
-        },
         launchSite: {
             type: String,
             required: true,

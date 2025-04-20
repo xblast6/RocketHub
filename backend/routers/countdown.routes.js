@@ -6,25 +6,38 @@ const router = express.Router();
 //GET Lista countdown
 router.get("/", async (req, res, next) => {
     try {
-        const countdownList = await Countdown.find()
-        .populate("rocket", "name image")
-        .populate("company", "name");
-        res.status(200).json(countdownList)
+        const countdownList = await Countdown.find().populate({
+          path: "rocket",
+          select: "name image",
+          populate: {
+            path: "company",
+            select: "name"
+          }
+        });
+        res.status(200).json(countdownList);
     } catch (error) {
-        next(error)
+        next(error);
     }
 });
+
 
 //GET Singolo countdown
 router.get("/:id", async (req, res, next) => {
     try {
-        const countdown = await Countdown.findById(req.params.id)
+        const countdown = await Countdown.findById(req.params.id).populate({
+          path: "rocket",
+          select: "name image",
+          populate: {
+            path: "company",
+            select: "name"
+          }
+        });
         if (!countdown) {
             return res.status(404).json({ message: "Countdown non trovato" });
-          }
-        res.status(200).json(countdown)
+        }
+        res.status(200).json(countdown);
     } catch (error) {
-        next(error)
+        next(error);
     }
 });
 
@@ -48,13 +61,13 @@ router.patch("/:id", async (req, res, next) => {
     try {
         const updatedCountdown = await Countdown.findByIdAndUpdate( 
             req.params.id,
-            req,body,
+            req.body,
             { new: true }
         )
         if (!updatedCountdown) {
             return res.status(404).json({ error: "Countdown non trovato" });
         }
-        res.json(updatedCompany);
+        res.json(updatedCountdown);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

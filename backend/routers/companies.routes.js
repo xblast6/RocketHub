@@ -1,6 +1,6 @@
 import express from "express";
 import Company from "../models/Company.js";
-import rocketsRouter from "./rockets.routes.js";
+import isAdmin from "../middlewares/isAdmin.js";
 
 const router = express.Router();
 
@@ -28,7 +28,7 @@ router.get("/:id", async (req, res, next) => {
 });
 
 // POST Nuova azienda
-router.post("/", async (req, res, next) => {
+router.post("/", isAdmin, async (req, res, next) => {
   try {
     const newCompany = new Company(req.body);
     const savedCompany = await newCompany.save();
@@ -43,7 +43,7 @@ router.post("/", async (req, res, next) => {
 });
 
 // PATCH Modifica azienda
-router.patch("/:id", async (req, res, next) => {
+router.patch("/:id", isAdmin, async (req, res, next) => {
   try {
     const updatedCompany = await Company.findByIdAndUpdate(
       req.params.id,
@@ -60,7 +60,7 @@ router.patch("/:id", async (req, res, next) => {
 });
 
 // DELETE Elimina azienda
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", isAdmin, async (req, res, next) => {
   try {
     const deletedCompany = await Company.findByIdAndDelete(req.params.id);
     if (!deletedCompany) {

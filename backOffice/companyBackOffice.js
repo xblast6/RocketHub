@@ -12,26 +12,43 @@ const urlCompanies = "http://localhost:5010/companies"
 document.addEventListener("DOMContentLoaded", fetchCompanies);
 // Fetch upload
 async function uploadImage(file) {
+    const token = localStorage.getItem("adminToken");
     const formData = new FormData();
     formData.append("image", file);
+
     const response = await fetch("http://localhost:5010/upload", {
         method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
         body: formData,
     });
+    
     if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
     return await response.json();
 }
 
 // Fetch aziende
 function fetchCompanies() {
-    fetch(urlCompanies)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            renderCompanies(data);
-        })
-        .catch(err => console.log("Errore: ", err))
-}
+    const token = localStorage.getItem("adminToken"); 
+    fetch(urlCompanies, {
+      headers: {
+        "Authorization": `Bearer ${token}` 
+      }
+    })
+      .then(res => {
+        if (!res.ok) {
+          return res.json().then(err => Promise.reject(err));
+        }
+        return res.json();
+      })
+      .then(data => {
+        console.log(data);
+        renderCompanies(data);
+      })
+      .catch(err => console.log("Errore: ", err));
+  }
+  
 
 // Creazione dell' azienda
 mainForm.addEventListener("submit", async (e) => {
@@ -99,7 +116,7 @@ mainForm.addEventListener("submit", async (e) => {
     }
 });
 
-//render nel box sotto al form del backoffice
+//render backoffice
 function renderCompanies(companies) {
     renderApi.innerHTML = "";
     companies.forEach((company) => {
@@ -120,7 +137,7 @@ function renderCompanies(companies) {
     eventiBtn();
 }
 
-//Funzione per prendere gli eventi modifica ed elimina
+//eventi modifica ed elimina
 function eventiBtn() {
     document.querySelectorAll(".btn-modifica").forEach(btn => {
         btn.addEventListener("click", (e) => {
@@ -154,7 +171,7 @@ function eventiBtn() {
     });
 }
 
-// funzione elimina
+// elimina
 async function deleteCompany(id) {
     try {
         const token = localStorage.getItem("adminToken");
@@ -229,3 +246,8 @@ async function updateCompany(id, updatedData) {
         console.error("Errore durante la modifica:", error);
     }
 }
+const btnLogout = document.getElementById("btnLogout")
+btnLogout.addEventListener("click", () => {
+    localStorage.removeItem('adminToken');
+    window.location.href = 'index.html';
+})

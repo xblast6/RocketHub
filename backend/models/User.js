@@ -22,7 +22,11 @@ const UserSchema = new mongoose.Schema({
     enum: ['user', 'admin'],
     default: 'user',
   }
-}, { timestamps: true });
+},
+{ 
+  timestamps: true 
+}
+);
 
 UserSchema.pre('save', async function(next) {
   if (this.isModified('password')) {

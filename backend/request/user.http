@@ -5,10 +5,11 @@ POST http://localhost:5010/auth/signup
 Content-Type: application/json
 
 {
-    "email": "adminadmin@admin.it",
+    "email": "adminadmin3@admin.it",
     "password": "adminpass1!",
-    "name": "nome admin",
-    "role": "admin"
+    "name": "nome admin3",
+    "role": "admin",
+    "image": "son la foto di profilo di admin"
 }
 
 ###

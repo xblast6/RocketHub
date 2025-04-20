@@ -6,7 +6,7 @@ const router = express.Router();
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-// Funzione che crea uno stream per l'upload su Cloudinary
+// Upload su Cloudinary
 const streamUpload = (req) => {
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream((error, result) => {
@@ -20,7 +20,7 @@ const streamUpload = (req) => {
   });
 };
 
-// Ora l'endpoint è POST /upload (senza ripetizioni)
+//POST /upload 
 router.post('/', upload.single('image'), async (req, res) => {
   try {
     const result = await streamUpload(req);

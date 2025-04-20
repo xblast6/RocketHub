@@ -1,5 +1,7 @@
 import express from "express";
 import Rocket from "../models/Rocket.js";
+import verifyToken from "../middlewares/verifyToken.js";
+import isAdmin from "../middlewares/isAdmin.js";
 
 const router = express.Router();
 
@@ -26,6 +28,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+router.use(verifyToken, isAdmin);
 // POST Crea razzo
 router.post("/", async (req, res, next) => {
   try {

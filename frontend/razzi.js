@@ -113,8 +113,14 @@ function RenderRocketInfo(rocket) {
         </button>
         <div class="container-rocket-info">
             <div class="rocket-name">
-                <p class="card-rocket-detail">${rocket.name} - </p>
-                <p class="card-rocket-detail"> ${rocket.company.name}</p>
+                <p class="card-rocket-detail">${rocket.name}</p>
+                
+            </div>
+            <div class="card-rocket-company">
+              <p class="card-rocket-detail"> ${rocket.company.name}</p>
+              <div class="container-logo-card">
+                <img src="${rocket.company.logo}" alt="Logo di: ${rocket.company.name}">
+              </div>
             </div>
             <div class="container-img-rocket">
                 <img src="${rocket.image}" alt="${rocket.name}">
@@ -129,29 +135,36 @@ function RenderRocketInfo(rocket) {
     const divStages = document.createElement("div")
         divStages.classList.add("rocket-stages")
         divStages.innerHTML = `
-            <p class="info">Numero di stadi: ${rocket.stages.stageNumber}</p>
+            <p class="stages">Numero di stadi: ${rocket.stages.stageNumber}</p>
         `
-
+        const { stageNumber, firstStageEngine, secondStageEngine, thirdStageEngine } = rocket.stages;
+        
         divStages.innerHTML += `
-            <p class="info">Primo stadio: </p>
-            <p class="info">Nome motore: ${rocket.stages.firstStageEngine.engineName}</p>
-            <p class="info">Numero motori:${rocket.stages.firstStageEngine.engineCount}</p>
+            <p class="stage-number"><strong>Primo stadio: </strong></p>
+            <div class="stage-info">
+              <p class="info">Numero motori:<strong> ${rocket.stages.firstStageEngine.engineCount}</strong></p>
+              <p class="info">Nome motore: <strong> ${rocket.stages.firstStageEngine.engineName}</strong></p>
+            </div>
         `
 
-        if (rocket.stages.secondStageEngine) {
+        if (stageNumber >= 2) {
             divStages.innerHTML += `
-        <p class="info"><strong>Secondo stadio</strong></p>
-        <p class="info">Nome motore: ${rocket.stages.secondStageEngine.engineName}</p>
-        <p class="info">Numero motori: ${rocket.stages.secondStageEngine.engineCount}</p>
+        <p class="stage-number"><strong>Secondo stadio</strong></p>
+        <div class="stage-info">
+          <p class="info">Numero motori: <strong> ${rocket.stages.secondStageEngine.engineCount}</strong></p>
+          <p class="info">Nome motore: <strong> ${rocket.stages.secondStageEngine.engineName}</strong></p>
+        </div>
       `;
     }
     
-    if (rocket.stages.thirdStageEngine) {
+    if (stageNumber >= 3) {
         divStages.innerHTML += `
-        <p class="info"><strong>Terzo stadio</strong></p>
-        <p class="info">Nome motore: ${rocket.stages.thirdStageEngine.engineName}</p>
-        <p class="info">Numero motori: ${rocket.stages.thirdStageEngine.engineCount}</p>
-      `;
+        <p class="stage-number"><strong>Terzo stadio</strong></p>
+        <div class="stage-info">
+          <p class="info">Numero motori: <strong> ${rocket.stages.thirdStageEngine.engineCount}</strong></p>
+          <p class="info">Nome motore: <strong> ${rocket.stages.thirdStageEngine.engineName}</strong></p>
+        </div>
+          `;
     }
     containerCatalogo.appendChild(rocketDetailCard)
     rocketDetailCard.appendChild(divStages)

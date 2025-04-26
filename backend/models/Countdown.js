@@ -28,6 +28,20 @@ const CountdownSchema = new mongoose.Schema (
             type: String,
             default: null
         },
+        reactions: [{
+            type: {
+                type:String,
+                enum: ["launch", "explosion", "delay", "weather"]
+            },
+            user: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "User"
+            },
+            createdAt: {
+                type: Date,
+                default: Date.now
+            }
+        }],
         notificationSent: {
             type: Boolean,
             default: false

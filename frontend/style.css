@@ -16,6 +16,7 @@
 
 *, *::before, *::after {
   box-sizing: border-box;
+
 }
 
 html, body, p, h1, h2, h3, h4, h5, h6, ion-icon {
@@ -32,6 +33,9 @@ a {
   text-decoration: none;
 }
 
+button:active {
+  transform: scale(0.95);
+}
 
 /* NAVBAR - NAVBRA - NAVBAR - */
 header {
@@ -173,7 +177,7 @@ nav {
   height: 100vh;
 }
 
-.container-home-img {
+.container-home-img  {
   height: 100vh;
   width: 100%;
   position: relative;
@@ -197,6 +201,34 @@ nav {
   font-size: var(--size-title);
   font-family: var(--text-font);
 }
+
+#nasaImageDay {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-nasa-image img {
+  width: 800px;
+  height: 800px;
+  object-fit: contain;
+  border-radius: 10pt;
+  border: 1px solid var(--main-text-color);
+  padding: 0.8em;
+}
+
+#nasaImageDay p {
+  position: absolute;
+  font-family: var(--title-font);
+  font-size: var(--size-title);
+  color: var(--main-text-color);
+  top: 10%;
+  right: 50%;
+  transform: translatex(50%);
+  z-index: 5;
+}
+
 
 /* IMMAGINI HOME - IMMAGINI HOME - IMMAGINI HOME - */
 
@@ -231,6 +263,13 @@ nav {
   width: 100%;
   height: 100vh;
   background-color: var(--second-color);
+}
+
+.login h2 {
+  color: var(--main-text-color);
+  font-family: var(--text-font);
+  margin-bottom: 1em;
+  font-weight: 600;
 }
 
 .login-locale, .login-google {
@@ -319,7 +358,8 @@ nav {
   margin-bottom: 1em;
   text-align: center;
   color: var(--second-color);
-
+  font-size: var(--size-title);
+  z-index: 5;
 }
 
 #searchFilter {
@@ -356,7 +396,8 @@ nav {
   width: 8em;
   height: 3em;
   border-radius: var(--border-radius-input);
-  padding-left: 1em;
+  padding-left: 0.5
+  em;
   border: 1px solid var(--second-color);
   color: var(--second-color);
 }
@@ -418,7 +459,7 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: start;
-  gap: 1em;
+  gap: 0.5em;
 }
 
 #btnBack {
@@ -438,7 +479,414 @@ nav {
   font-size: var(--size-text);
 }
 
+.card-rocket-company {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.container-logo-card {
+  width: auto;
+  height: 100px;
+}
+
+.container-logo-card img {
+  width: 400px;
+  object-fit: cover;
+}
+
+.stages {
+  margin-bottom: 1em;
+}
+
+.stage-info {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.2em;
+  margin-bottom: 1em;
+}
+
+.stage-info strong {
+  color: var(--second-color);
+}
+
 /*RAZZI - RAZZI - RAZZI*/
+/* COUNTDOWN - COUNTDOWN - COUNTDOWN*/
+.countdown-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 3em;
+  gap: 2em;
+}
+
+#containerCountdown {
+  align-self: self-start;
+}
+
+.container-countdown-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+  border-bottom: 1px solid var(--second-color);
+  width: 60em;
+}
+
+.container-info-countdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
+
+.container-difference-time-countdown {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  
+}
+
+.container-info-countdown strong{
+  color: var(--second-color);
+}
+
+.container-interact-reaction {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  margin-bottom: 0.8em;
+}
+
+.btn-reaction-toggle {
+  width: 15em;
+  height: 3em;
+  border-radius: var(--border-radius-input);
+  background-color: var(--second-color);
+  color: var(--main-text-color);
+  font-family: var(--text-font);
+  cursor: pointer;
+}
+
+.container-reactions {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  margin-left: 0.5em;
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+  transition: all 0.4s ease-in-out;
+}
+
+.show {
+  opacity: 1;
+  max-width: 500px; 
+}
+
+.reactions {
+  padding: 0.2em 0.5em;
+  border: 1px dashed var(--second-color);
+  border-radius: var(--border-radius-input);
+  cursor: pointer;
+}
+/* COUNTDOWN - COUNTDOWN - COUNTDOWN*/
+
+
+/* MOON - MOON - MOON*/
+#firstViewMoon {
+  position: relative;
+}
+
+.moon-title {
+  position: absolute;
+  top: 10%;
+  right: 50%;
+  transform: translateX(50%);
+  z-index: 5;
+  color: var(--main-text-color);
+  font-size: var(--size-title);
+  font-family: var(--title-font);
+}
+
+.container-img-moon {
+  height: 100vh;
+ 
+}
+
+.container-img-moon img {
+  height: 100vh;
+  width: 100%;
+  object-fit: cover;
+}
+
+.container-peso-lunare {
+  position: absolute;
+  top: 30%;
+  transform: translateY(50%);
+  left: 5%;
+  color: var(--main-text-color);
+  font-family: var(--text-font);
+}
+
+.user-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.container-peso-lunare input {
+  width: 20em;
+  height: 3em;
+  border-radius: var(--border-radius-input);
+  border: 1px solid var(--second-color);
+  color: var(--second-color);
+  padding-left: 0.5em;
+}
+
+.container-peso-lunare input::placeholder {
+  color: var(--second-color);
+  
+}
+
+#btnCalcWeightMoon {
+  background-color: var(--second-color);
+  padding: 0.5em 1em;
+  border-radius: var(--border-radius-input);
+  border: none;
+  color: var(--main-text-color);
+  width: 40%;
+}
+
+.interact-moon-section {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background-color: black;
+}
+
+.card-moon-interact {
+  align-items: center;
+  font-family: var(--text-font);
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  position: absolute;
+  top: -10%;
+  right: 50%;
+  transform: translateX(50%);
+  color: var(--main-text-color);
+}
+
+.gallery-moon-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.container-gallery-nasa {
+  position: relative;
+  color: var(--main-text-color);
+  font-family: var(--text-font);
+  padding: 1em;
+}
+
+.container-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateX(50%);
+  font-size: var(--size-mobile-title);
+  padding: 0.3em;
+  border: 1px solid var(--second-color);
+  border-radius: var(--border-radius-input);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--second-color);
+  cursor: pointer;
+}
+
+.container-arrow ion-icon {
+  margin: 0;
+}
+
+.dx {
+  right: 5%;
+}
+
+.sx {
+  left: 1%;
+}
+
+#galleryNasa {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  scroll-behavior: smooth;
+  overflow-x: scroll;
+}
+
+.card-gallery-nasa {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 1em;
+  border: 1px solid var(--second-color);
+  border-radius: var(--border-radius-input);
+}
+
+.card-gallery-nasa img {
+  height: 500px;
+  width: 500px;
+  object-fit: cover;
+  border-radius: var(--border-radius-input);
+}
+
+/* MOON - MOON - MOON*/
+/*MARS - MARRS - MARS*/
+.mars-section {
+  width: 100%;
+  height: 100vh;
+  background-color: #c4945ea4;
+  color: var(--main-text-color);
+  font-family: var(--text-font);
+}
+
+.container-image-mars {
+  height: 100vh;
+  width: 100%;
+}
+
+.container-image-mars img {
+  height: 100vh;
+  width: 100%;
+  object-fit: cover;
+}
+
+.container-rover-mars {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  background-image: url("");
+}
+
+.top {
+  padding-top: 5em;
+}
+
+.container-input-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+.container-input-user input, .container-input-user select, #btnRoverMars {
+  width: 15em;
+  height: 2em;
+  border-radius: 5pt;
+  border: 1px solid var(--second-color);
+}
+
+#btnRoverMars {
+  border-radius: 5pt;
+  border: 1px solid var(--second-color);
+  background-color: var(--second-color);
+  color: var(--main-text-color);
+  cursor: pointer;
+}
+
+
+
+.card-rover-image {
+  max-width: 750px;
+  max-height: 750px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+#roverImage {
+  padding: 1em;
+  border: 1px solid var(--main-text-color);
+  border-radius: 10pt;
+  width: 700px;
+  height: 700px;
+}
+
+.card-rover-image img {
+  width: 90%;
+  height: 90%;
+  object-fit: cover;
+  border-radius: 10pt;
+  
+}
+
+.rover-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #c4945ea4;
+  font-family: var(--text-font);
+  gap: 2em;
+}
+
+.rover-section h2 {
+  font-family: var(--title-font);
+  font-size: var(--size-title);
+}
+
+.container-rover-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+}
+
+.rover-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  font-size: var(--size-text);
+  color: var(--main-text-color);
+}
+
+.rover-info strong {
+  color: var(--second-color);
+}
+
+.container-rover-img {
+  width: 500px;
+  height: 500px;
+}
+
+.container-rover-img img {
+  width: 500px;
+  height: 500px;
+  border-radius: var(--border-radius-input);
+  object-fit: cover;
+  object-position: top;
+}
+
+.spinner {
+  border: 8px solid rgba(255,255,255,0.2);
+  border-top: 8px solid var(--second-color);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  margin: 3em auto; /* lo centri orizzontalmente e un po’ di margine */
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
 
 
 
@@ -467,6 +915,13 @@ nav {
 
   .container-text-image {
     font-size: var(--size-mobile-title);
+  }
+
+  .container-peso-lunare {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 
@@ -569,6 +1024,15 @@ nav {
     .container-text-image {
       font-size: var(--size-mobile-title);
     }
+
+    .container-nasa-image img {
+      width: 600px;
+      height: 600px;
+    }
+
+    #nasaImageDay p {
+      text-align: center;
+    }
     /* IMG HOME - IMG HOME*/
 
     /*LOGIN - login*/
@@ -606,7 +1070,34 @@ nav {
       gap: 0.5em;
     }
 
-    
+    .rocket-card-detail {
+      align-items: center;
+    }
+    /* RAZZI - RAZZI - RAZZI*/
+    /*COUNTDOWN - COUNTDOWN*/
+    .countdown-section {
+      padding: 0.8em;
+    }
+
+    .container-countdown-box {
+      width: 45em;
+    }
+    /*COUNTDOWN - COUNTDOWN*/
+    /*MOON - MOON - MOON*/
+    .container-peso-lunare {
+      position: absolute;
+      top: 75%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .interact-moon-section {
+      margin-top: -1px;
+    }
+
+    .card-moon-interact p {
+      max-width: 80%;
+    }
 }
 
 /* SMARTPHONE - SMARTPHONE*/
@@ -699,7 +1190,17 @@ nav {
         /* IMG HOME - IMG HOME*/
 
     .container-text-image {
-      font-size: var(--size-mobile-text);
+      font-size: 1em;
+      top: 20%;
+    }
+
+    .container-nasa-image img {
+      width: 350px;
+      height: 350px;
+    }
+
+    #nasaImageDay p {
+      font-size: var(--size-text);
     }
     /* IMG HOME - IMG HOME*/
 
@@ -754,5 +1255,35 @@ nav {
       padding-left: 0.3em;
     }
         /*RAZZI - RAZZI */
+        /*COUNTDOWN - COUNTDOWN*/
+        .countdown-section {
+          padding: 0.5em;
+        }
 
+        .container-countdown-box {
+          width: 23em;
+        }
+
+        .container-difference-time-countdown {
+          flex-direction: column;
+          align-items: start;
+        }
+
+        .container-info-countdown p, .countdown-timer {
+          font-size: var(--size-mobile-text);
+        }
+
+        .container-reactions {
+          flex-direction: column;
+          display: none;
+        }
+
+        .show {
+          display: block;
+        }
+
+        .container-interact-reaction {
+          flex-direction: column;
+        }
+        /*COUNTDOWN - COUNTDOWN*/
 }

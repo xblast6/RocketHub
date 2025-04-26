@@ -24,6 +24,7 @@ server.use(session({
   secret: process.env.SESSION_SECRET || 'sessionsecret',
   resave: false,
   saveUninitialized: true,
+  cookie: { maxAge: 24 * 60 * 60 * 1000 }
 }));
 
 server.use(passport.initialize());
@@ -34,10 +35,10 @@ server.use('/auth', authRouter);
 import { nextCountdown } from './controllers/countdown.controller.js';
 server.get('/countdowns/nextCountdown', nextCountdown);
 server.use('/rockets', rocketsRouter);
+server.use("/countdowns", countdownRouter);
 
 // Rotte protette
 server.use('/companies', verifyToken, isAdmin, companiesRouter);
-server.use('/countdowns', verifyToken, isAdmin, countdownRouter);
 server.use('/upload', verifyToken, isAdmin, uploadRouter);
 
 // gestione degli errori

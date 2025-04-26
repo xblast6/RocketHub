@@ -1,8 +1,11 @@
 import express from "express";
 import Countdown from "../models/Countdown.js";
+import isAdmin from '../middlewares/isAdmin.js';
+import verifyToken from '../middlewares/verifyToken.js';
 
 const router = express.Router();
 
+router.use(verifyToken);
 //GET Lista countdown
 router.get("/", async (req, res, next) => {
     try {
@@ -41,6 +44,26 @@ router.get("/:id", async (req, res, next) => {
     }
 });
 
+//POST Reazione countdown (User)
+router.post("/:id/reactions", async (req, res) => {
+    try {
+        const { type } = req.body
+        const userId = req.user._id || req.user.id;
+
+        const countdown = await Countdown.findById(req.params.id)
+        if(!countdown) return res.status(404).json({message: "Countdown non trovato" })
+        
+        countdown.reactions.push({ type, user: userId })
+        await countdown.save()
+
+        res.status(200).json(countdown.reactions)
+    } catch (err) {
+        res.status(500).json({ error: err.message })
+    }   
+})
+
+
+router.use(isAdmin);
 //POST nuovo countdown
 router.post("/", async (req, res, next) => {
     try {
@@ -55,6 +78,8 @@ router.post("/", async (req, res, next) => {
           }
     }
 })
+
+
 
 //PATCH modifica countdown
 router.patch("/:id", async (req, res, next) => {

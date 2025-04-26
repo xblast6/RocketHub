@@ -1,7 +1,6 @@
 const btnMenu = document.getElementById("btnMenu")
 const menuSection = document.getElementById("menuSection")
 const navButtons = document.querySelectorAll(".container-navbar");
-const countdown = document.getElementById("countdown")
 
 const ULR_BASE = "http://localhost:5010"
 const URL_COUNTDOWN = ULR_BASE + "/countdowns"
@@ -73,3 +72,10 @@ navLinks.forEach(link => {
     }
   });
 });
+
+const countdownEl = document.getElementById("countdown");
+if (countdownEl) {
+  window.addEventListener("DOMContentLoaded", () => {
+    fetchNextCountdown();
+  });
+}

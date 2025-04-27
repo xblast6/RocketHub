@@ -55,7 +55,7 @@ const RocketSchema = new mongoose.Schema(
       stageNumber: {
         type: Number,
         required: true,
-        default: 2
+        default: 1
       },
       firstStageEngine: {
         engineName: {
@@ -75,7 +75,7 @@ const RocketSchema = new mongoose.Schema(
         },
         engineCount: {
           type: Number,
-          max: 8
+          max: 10
         }
       },
       thirdStageEngine: {
@@ -84,7 +84,11 @@ const RocketSchema = new mongoose.Schema(
         },
         engineCount: {
           type: Number,
-          max: 3
+          max: 4
+        },
+        opzionale: {
+          type: Boolean,
+          default: false
         }
       }
     }

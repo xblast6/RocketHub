@@ -1,5 +1,7 @@
 import express from "express";
 import Rocket from "../models/Rocket.js";
+import verifyToken from "../middlewares/verifyToken.js";
+import isAdmin from "../middlewares/isAdmin.js";
 
 const router = express.Router();
 
@@ -26,6 +28,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
+router.use(verifyToken, isAdmin);
 // POST Crea razzo
 router.post("/", async (req, res, next) => {
   try {
@@ -40,7 +43,11 @@ router.post("/", async (req, res, next) => {
 // PATCH Modifica razzo
 router.patch("/:id", async (req, res, next) => {
   try {
-    const updatedRocket = await Rocket.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const updatedRocket = await Rocket.findByIdAndUpdate(
+      req.params.id, 
+      req.body, 
+      { new: true, runValidators: true }
+    );
     if (!updatedRocket) {
       return res.status(404).json({ error: "Razzo non trovato" });
     }
@@ -49,6 +56,7 @@ router.patch("/:id", async (req, res, next) => {
     next(err);
   }
 });
+
 
 // DELETE Elimina razzo
 router.delete("/:id", async (req, res, next) => {

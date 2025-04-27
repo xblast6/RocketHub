@@ -40,9 +40,14 @@
     </section>
 
     <main id="main" class="">
-        <div class="container-pag-backoffice">
-            <a class="btn-backoffice" href="agg_company.html">Aggiungi un'Azienda</a>
-            <a class="btn-backoffice" href="agg_razzi.html">Aggiungi un razzo</a>
+        <div class="container-nav">
+            <div class="container-pag-backoffice">
+                <a class="btn-backoffice" href="agg_company.html">Aggiungi un'Azienda</a>
+                <a class="btn-backoffice" href="agg_razzi.html">Aggiungi un razzo</a>
+                <a class="btn-backoffice" href="agg_countdown.html">Aggiungi un countdown</a>
+                <a class="btn-backoffice" href="gestisci_home.html">Gestisci la home</a>
+            </div>
+            <button id="btnLogout" class="btn-backoffice">Logout</button>
         </div>
         <h1>BackOffice - Aggiungi un' Azienda</h1>
         <form id="formAzienda">
@@ -50,7 +55,7 @@
                 <label for="name">Name:</label>
                 <input id="companyName" type="text" placeholder="Inserisci il nome dell'Azienda...">
             </div>
-            <div class="container-voce-form file-upload">
+            <div class="container-voce-form">
                 <label for="logo">image:</label>
                 <input id="companyLogo" type="file" >
             </div>

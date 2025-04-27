@@ -12,22 +12,45 @@ const urlCompanies = "http://localhost:5010/companies"
 document.addEventListener("DOMContentLoaded", fetchCompanies);
 // Fetch upload
 async function uploadImage(file) {
+    const token = localStorage.getItem("adminToken");
     const formData = new FormData();
     formData.append("image", file);
+
     const response = await fetch("http://localhost:5010/upload", {
         method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
         body: formData,
     });
+    
     if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
     return await response.json();
 }
+
 // Fetch aziende
-async function fetchCompanies() {
-    const response = await fetch(urlCompanies);
-    const companies = await response.json();
-    renderCompanies(companies);
-}
-// Creazione dell' azienda tramitte form
+function fetchCompanies() {
+    const token = localStorage.getItem("adminToken"); 
+    fetch(urlCompanies, {
+      headers: {
+        "Authorization": `Bearer ${token}` 
+      }
+    })
+      .then(res => {
+        if (!res.ok) {
+          return res.json().then(err => Promise.reject(err));
+        }
+        return res.json();
+      })
+      .then(data => {
+        console.log(data);
+        renderCompanies(data);
+      })
+      .catch(err => console.log("Errore: ", err));
+  }
+  
+
+// Creazione dell' azienda
 mainForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -66,9 +89,14 @@ mainForm.addEventListener("submit", async (e) => {
             website: companyWebsite,
         };
 
+        const token = localStorage.getItem("adminToken");
+
         const response = await fetch(urlCompanies, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token 
+            },
             body: JSON.stringify(payload),
         });
 
@@ -88,7 +116,7 @@ mainForm.addEventListener("submit", async (e) => {
     }
 });
 
-//render nel box sotto al form del backoffice
+//render backoffice
 function renderCompanies(companies) {
     renderApi.innerHTML = "";
     companies.forEach((company) => {
@@ -109,7 +137,7 @@ function renderCompanies(companies) {
     eventiBtn();
 }
 
-//Funzione per prendere gli eventi modifica ed elimina
+//eventi modifica ed elimina
 function eventiBtn() {
     document.querySelectorAll(".btn-modifica").forEach(btn => {
         btn.addEventListener("click", (e) => {
@@ -143,15 +171,19 @@ function eventiBtn() {
     });
 }
 
-// funzione elimina
+// elimina
 async function deleteCompany(id) {
     try {
+        const token = localStorage.getItem("adminToken");
         const response = await fetch(urlCompanies + "/" + id, {
             method: "DELETE",
+            headers: {
+                "Authorization": "Bearer " + token
+            }
         })
         if (!response.ok) {
             const errorData = await response.json()
-            throw new Error("ERRORE: ${response.status} - ${errorData.error}")
+            throw new Error(`ERRORE: ${response.status} - ${errorData.error}`)
         }
         fetchCompanies();
     } catch (error) {
@@ -195,18 +227,27 @@ document.getElementById("formModale").addEventListener("submit", async (e) => {
 
 async function updateCompany(id, updatedData) {
     try {
+        const token = localStorage.getItem("adminToken");
         const response = await fetch(urlCompanies + "/" + id, {
             method: "PATCH",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
             body: JSON.stringify(updatedData)
         })
         if (!response.ok) {
             const errorData = await response.json()
-            throw new Error("ERRORE: ${response.status} - ${errorData.error}")
+            throw new Error(`ERRORE: ${response.status} - ${errorData.error}`)
         }
         fetchCompanies()
         main.classList.remove("blur")
-    } catch(error) {
+    } catch (error) {
         console.error("Errore durante la modifica:", error);
     }
 }
+const btnLogout = document.getElementById("btnLogout")
+btnLogout.addEventListener("click", () => {
+    localStorage.removeItem('adminToken');
+    window.location.href = 'index.html';
+})

@@ -2,12 +2,23 @@ const btnMenu = document.getElementById("btnMenu")
 const menuSection = document.getElementById("menuSection")
 const navButtons = document.querySelectorAll(".container-navbar");
 
+const countdownEl = document.getElementById("countdown");
 const ULR_BASE = "http://localhost:5010"
 const URL_COUNTDOWN = ULR_BASE + "/countdowns"
 
-btnMenu.addEventListener("click", () => {
-    menuSection.classList.toggle("aperto")
-})
+
+console.log("btnMenu:", btnMenu);
+console.log("btnMenu.addEventListener:", btnMenu && btnMenu.addEventListener);
+
+  (function handleOAuthToken() {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+    if (token) {
+      localStorage.setItem('token', token);
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  })();
+
 
 window.addEventListener("scroll", () => {
   const scrolledBeyond300 = window.scrollY > 300;
@@ -16,49 +27,89 @@ window.addEventListener("scroll", () => {
   });
 });
 
-function countdownDifferenceTime(dateString) {
-    const date = new Date(dateString)
 
-    let daySpan = document.getElementById("days")
-    let hoursSpan = document.getElementById("hours")
-    let minutesSpan = document.getElementById("minutes")
-    let secondSpan = document.getElementById("seconds")
 
-    function differenceTime() {
-        const now = new Date();
-        const difference = date - now
-
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((difference / (1000 * 60)) % 60);
-        const seconds = Math.floor((difference / 1000) % 60); 
-
-        countdown.textContent = 
-        `${days}D ` +
-        `${hours}H ` +
-        `${minutes}M ` + 
-        `${seconds}S`
-    }
-
-    differenceTime()
-    const intervalId = setInterval(differenceTime, 1000);
-}
 
 function fetchNextCountdown() {
-    fetch(URL_COUNTDOWN + "/nextCountdown")
+  fetch(URL_COUNTDOWN + "/nextCountdown")
     .then(res => res.json())
     .then(data => {
-        console.log(data);
-        renderNextCountdown(data)
+      console.log(data);
+      renderNextCountdown(data)
     })
     .catch(err => console.log("Errore: ", err))
 }
 
 function renderNextCountdown(data) {
-    countdownDifferenceTime(data.launchDate)
+  countdownDifferenceTime(data.launchDate)
+
 }
 
-fetchNextCountdown()
+// script.js
+window.addEventListener("DOMContentLoaded", () => {
+  const btnMenu     = document.getElementById("btnMenu");
+  const menuSection = document.getElementById("menuSection");
+  const daysSpan    = document.getElementById("days");
+  const hoursSpan   = document.getElementById("hours");
+  const minutesSpan = document.getElementById("minutes");
+  const secondsSpan = document.getElementById("seconds");
+
+  if (!btnMenu || !menuSection) {
+    console.error("❌ Mancano #btnMenu o #menuSection");
+    return;
+  }
+
+  btnMenu.addEventListener("click", () =>
+    menuSection.classList.toggle("aperto")
+  );
+
+  function countdownDifferenceTime(dateString) {
+    const targetDate = new Date(dateString);
+    let timerId;
+
+    function tick() {
+      const diff = targetDate - Date.now();
+      if (diff <= 0) {
+        clearInterval(timerId);
+        return fetchNextCountdown(); 
+      }
+      const d = Math.floor(diff / 864e5);
+      const h = Math.floor((diff % 864e5) / 36e5);
+      const m = Math.floor((diff % 36e5) / 6e4);
+      const s = Math.floor((diff % 6e4)  / 1000);
+
+      daysSpan.textContent    = String(d).padStart(2, "0");
+      hoursSpan.textContent   = String(h).padStart(2, "0");
+      minutesSpan.textContent = String(m).padStart(2, "0");
+      secondsSpan.textContent = String(s).padStart(2, "0");
+    }
+
+    tick();
+    timerId = setInterval(tick, 1000);
+  }
+
+  function renderNextCountdown(data) {
+    if (!data?.launchDate) {
+      console.warn("Nessun launchDate");
+      return;
+    }
+    countdownDifferenceTime(data.launchDate);
+  }
+
+  function fetchNextCountdown() {
+    fetch("http://localhost:5010/countdowns/nextCountdown")
+      .then(res => {
+        if (!res.ok) throw new Error(res.status);
+        return res.json();
+      })
+      .then(renderNextCountdown)
+      .catch(err => console.error("❌ fetchNextCountdown:", err));
+  }
+
+  // E finalmente
+  fetchNextCountdown();
+});
+
 
 const navLinks = Array.from(document.querySelectorAll('.container-navbar a'))
   .filter(a => a.getAttribute('href') !== 'login.html');
@@ -73,9 +124,56 @@ navLinks.forEach(link => {
   });
 });
 
-const countdownEl = document.getElementById("countdown");
+
 if (countdownEl) {
+  const daySpan     = document.getElementById("days");
+  const hoursSpan   = document.getElementById("hours");
+  const minutesSpan = document.getElementById("minutes");
+  const secondSpan = document.getElementById("seconds");
+  function countdownDifferenceTime(dateString) {
+    const targetDate = new Date(dateString);
+  
+  
+    function tick() {
+      const diff = targetDate - Date.now();
+      if (diff <= 0) {
+        clearInterval(timerId);
+        fetchNextCountdown();
+        return;
+      }
+  
+      const days = Math.floor(diff / 864e5);
+      const hours = Math.floor((diff % 864e5) / 36e5);
+      const minutes = Math.floor((diff % 36e5) / 6e4);
+      const seconds = Math.floor((diff % 6e4) / 1000);
+  
+      daySpan.textContent = String(days)
+      hoursSpan.textContent = String(hours)
+      minutesSpan.textContent = String(minutes)
+      secondSpan.textContent = String(seconds)
+    }
+  
+    tick();
+    const timerId = setInterval(tick, 1000);
+  }
   window.addEventListener("DOMContentLoaded", () => {
     fetchNextCountdown();
   });
 }
+
+
+const protectedPages = ['countdown.html', 'razzi.html'];
+const current = window.location.pathname.split('/').pop();
+if (protectedPages.includes(current) && !localStorage.getItem('token')) {
+  window.location.replace('login.html');
+}
+
+document.querySelectorAll('a[href="countdown.html"], a[href="razzi.html"]')
+  .forEach(link => {
+    link.addEventListener('click', e => {
+      if (!localStorage.getItem('token')) {
+        e.preventDefault();
+        window.location.href = 'login.html';
+      }
+    });
+  });

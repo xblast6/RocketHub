@@ -20,6 +20,8 @@ main {
 
 .container-pag-backoffice {
     margin: 20px 0;
+    display: flex;
+    align-items: center;
 }
 
 .btn-backoffice {
@@ -119,7 +121,7 @@ input, #rocketCompany, #inpCompany, #inpRocket {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    max-width: 30%;
+    max-width: 90%;
     position: absolute;
     right: 50%;
     transform: translate(50%, -5%);
@@ -260,7 +262,7 @@ input, #rocketCompany, #inpCompany, #inpRocket {
     }
 
     .card-backoffice {
-        max-width: 350px;
+        max-width: 300px;
         padding: 10px;
     }
 
@@ -294,12 +296,13 @@ input, #rocketCompany, #inpCompany, #inpRocket {
     }
 
     .container-form-modale {
-        max-width: 100%;
-        margin: 0 10px;
+        max-width: 90%;
+        margin: 0 auto;
         padding: 20px;
         border-width: 3px;
         border-radius: 5pt;
         max-height: 100vh;
+
       }
       .container-info-modale h3 {
         font-size: 1rem;

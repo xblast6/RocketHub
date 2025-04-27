@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RocketHub Home</title>
+    <title>RocketHub - Marte</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Michroma&display=swap" rel="stylesheet">
+
 </head>
 <body >
     <header>
@@ -101,18 +102,31 @@
         </section>
         <section class="mars-section">
             <div class="container-input-user">
-                <p id="maxSolCuriosity"></p>
+                <p id="maxSolCuriosity">Inserisci un numero per scegliere le foto scattate da curiosity durante quel giorno marziano (sol)</p>
                 <input type="number" name="marsSolCuriosity" id="marsSolCuriosity" placeholder="inserisci un numero...">
                 <button id="btnRoverMars">Invia</button>
-                <div id="roverImage"> </div>
+                <div class="container-curiosity-image">
+                    <div class="container-arrow sx invisible" id="sinistra">
+                        <ion-icon name="arrow-back-outline"></ion-icon>
+                    </div>
+                    <div id="roverImage"> </div>
+                    <div class="container-arrow dx invisible" id="destra">
+                        <ion-icon name="arrow-forward-outline"></ion-icon>
+                    </div>
+                </div>
             </div>
         </section>
-        
+
         
     </main>
 
     <footer>
-        
+        <p>RocketHub</p>
+        <p>N. Partita IVA: (Placeholder)</p>
+        <p>Telefono: (Placeholder) </p>
+        <p>Indirizzo: (Placeholder)</p>
+        <p>Email: (Placeholder)</p>
+        <p>Made with love da <strong>Alessandro Carnevale</strong></p>
     </footer>
 
 </body>

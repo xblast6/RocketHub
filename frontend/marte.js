@@ -8,6 +8,11 @@ const maxSolSpirit = document.getElementById("maxSolSpirit")
 const roverInfoOpportunity = document.getElementById("roverInfoOpportunity")
 const roverInfoCuriosity = document.getElementById("roverInfoCuriosity")
 const roverInfoPerseverance = document.getElementById("roverInfoPerseverance")
+const avanti = document.getElementById("destra")
+const indietro = document.getElementById("sinistra")
+
+let roverImgArray = []
+let currentIndex = 0
 
 window.addEventListener("DOMContentLoaded", () => {
     fetchSpiritRover()
@@ -117,6 +122,8 @@ btnRoverMars.addEventListener("click", () => {
         if (data.photos.length > 0) {
             let maxImageRover = data.photos.slice(0, 35)
             renderMarsRoverImage(maxImageRover)
+            avanti.style.opacity = "1"
+            indietro.style.opacity = "1"
         } else {
             roverImage.innerHTML = `
                 <p>Nessuna foto trovata nella data selezionata, seleziona un altro giorno</p>
@@ -127,23 +134,55 @@ btnRoverMars.addEventListener("click", () => {
 })
 
 function renderMarsRoverImage(data) {
-    roverImage.innerHTML = ``
-    data.forEach(img => {
-        let secureUrl = img.img_src
-        
-        if (secureUrl.startsWith("http:")) {
-            secureUrl = secureUrl.replace("http:", "https:")
-        }
-
-        const cardRoverImage = document.createElement("div")
-        cardRoverImage.classList.add("card-rover-image")
-        cardRoverImage.innerHTML = `
-        <p>Immagine scattata dalla camera ${img.camera.name}, durante il sol ${img.sol}:</p>
-        <img src="${secureUrl}" alt="foto da Marte del ${img.earth_date}">
-    `
-    roverImage.appendChild(cardRoverImage)
-    });
+    roverImage.innerHTML = "";
+    roverImgArray = data;         
+    currentIndex = 0;           
     
-}
-
+    data.forEach((img, i) => {
+      let src = img.img_src.replace(/^http:/, "https:");
+      const card = document.createElement("div");
+      card.className = "card-rover-image";
+      if (i === 0) card.classList.add("active"); 
+      card.innerHTML = `
+        <p>Camera ${img.camera.name}, sol ${img.sol}</p>
+        <img src="${src}" alt="Marte ${img.earth_date}">
+      `;
+      roverImage.appendChild(card);
+    });
+    aggiornaFreccie();            
+  }
+  
+  function aggiornaFreccie() {
+    if (currentIndex === 0) {
+        indietro.style.display = "none";
+      } else {
+        indietro.style.display = "block";
+      }
+      
+      if (currentIndex === roverImgArray.length - 1) {
+        avanti.style.display = "none";
+      } else {
+        avanti.style.display = "block";
+      }
+  }
+  
+  avanti.addEventListener("click", () => {
+    if (currentIndex < roverImgArray.length - 1) {
+      const cards = roverImage.querySelectorAll(".card-rover-image");
+      cards[currentIndex].classList.remove("active");
+      currentIndex++;
+      cards[currentIndex].classList.add("active");
+      aggiornaFreccie();
+    }
+  });
+  
+  indietro.addEventListener("click", () => {
+    if (currentIndex > 0) {
+      const cards = roverImage.querySelectorAll(".card-rover-image");
+      cards[currentIndex].classList.remove("active");
+      currentIndex--;
+      cards[currentIndex].classList.add("active");
+      aggiornaFreccie();
+    }
+  });
 

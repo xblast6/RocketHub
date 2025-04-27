@@ -155,7 +155,6 @@ function renderCountdowns(data) {
             <p>Stato: ${countdown.status}</p>
             <p>Descrizione: ${countdown.description}</p>
             <a href="${countdown.liveStreamUrl}" target="_blank">Link alla live</a>
-            <button id="" class="btn-backoffice">Inviami una notifica il giorno del lancio</button>
             <div class="container-btn-card-backoffice">
                 <button id="" class="btn-backoffice btn-modifica"
                 data-id="${countdown._id}"

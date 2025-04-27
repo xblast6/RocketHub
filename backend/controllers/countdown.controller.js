@@ -5,7 +5,7 @@ export const nextCountdown = async (req, res, next) => {
     const now = new Date();
     const next = await Countdown.findOne({
       status: "attivo",
-      launchDate: { $gte: now }
+      launchDate: { $gt: now }
     })
       .sort({ launchDate: 1 })
       .populate({

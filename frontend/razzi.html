@@ -8,6 +8,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Michroma&display=swap" rel="stylesheet">
+<script>
+    if (!localStorage.getItem('token')) {
+      window.location.replace('login.html');
+    }
+  </script>
 </head>
 <body class="background">
     <header class="navbar-background">
@@ -52,7 +57,7 @@
             <a href="login.html">Login</a>
         </div>
     </section>
-    <h1 class="title">Catalogo Razzi</h1>
+    <h1 class="title">Razzi</h1>
     <main>
         <section id="searchFilter">
             <div class="container-search">
@@ -74,6 +79,15 @@
             </div>
         </section>
     </main>
+
+    <footer>
+        <p>RocketHub</p>
+        <p>N. Partita IVA: (Placeholder)</p>
+        <p>Telefono: (Placeholder) </p>
+        <p>Indirizzo: (Placeholder)</p>
+        <p>Email: (Placeholder)</p>
+        <p>Made with love da <strong>Alessandro Carnevale</strong></p>
+    </footer>
 
 </body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

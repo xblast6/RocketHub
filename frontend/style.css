@@ -231,7 +231,13 @@ nav {
 
 
 /* IMMAGINI HOME - IMMAGINI HOME - IMMAGINI HOME - */
+/* LIVE HOME - LIVE HOME*/
+.container-last-live {
+  position: relative;
+  top: 10%;
+}
 
+/* LIVE HOME - LIVE HOME*/
 /*LOGIN - LOGIN - LOGIN*/
 .container-login {
   display: flex;
@@ -709,6 +715,7 @@ nav {
   justify-content: center;
   background-color: var(--second-color);
   cursor: pointer;
+  z-index: 5;
 }
 
 .container-arrow ion-icon {
@@ -785,6 +792,7 @@ nav {
   flex-direction: column;
   align-items: center;
   gap: 1em;
+  padding-top: 2em;
 }
 
 .container-input-user input, .container-input-user select, #btnRoverMars {
@@ -805,21 +813,21 @@ nav {
 
 
 .card-rover-image {
+  position: absolute;
+  top: 0; left: 0;
   max-width: 750px;
   max-height: 750px;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   gap: 1em;
 }
 
-#roverImage {
-  padding: 1em;
-  border: 1px solid var(--main-text-color);
-  border-radius: 10pt;
-  width: 700px;
-  height: 700px;
-}
+.card-rover-image.active {
+  display: flex;
+} 
+
+
 
 .card-rover-image img {
   width: 90%;
@@ -862,6 +870,22 @@ nav {
   color: var(--second-color);
 }
 
+.container-curiosity-image {
+  position: relative;
+  overflow: hidden;
+  padding: 1em;
+  border: 1px solid var(--main-text-color);
+  border-radius: 10pt;
+  width: 700px;
+  height: 700px;
+  display: flex;
+  align-items: center;
+}
+
+.invisible {
+  opacity: 0;
+}
+
 .container-rover-img {
   width: 500px;
   height: 500px;
@@ -888,7 +912,20 @@ nav {
   to { transform: rotate(360deg); }
 }
 
-
+/*MARS - MARRS - MARS*/
+/*FOOTER - FOOTER - FOOTER*/
+  footer {
+    padding: 1em;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    font-family: var(--text-font);
+    font-size: var(--size-text);
+    color: var(--main-text-color);
+  }
+/*FOOTER - FOOTER - FOOTER*/
 
 
 /*LAPTOP - LAPTOP LAPTOP*/
@@ -1098,6 +1135,25 @@ nav {
     .card-moon-interact p {
       max-width: 80%;
     }
+
+    /*MARS - MARS - MARS*/
+
+    .mars-section {
+      padding: 0.1em;
+    }
+
+    .container-rover-info {
+      flex-direction: column;
+      max-width: 100%;
+      font-size: var(--size-mobile-text);
+    }
+
+    
+    .container-image-mars img {
+      object-position: right;
+    }
+
+    /*MARS - MARS - MARS*/
 }
 
 /* SMARTPHONE - SMARTPHONE*/
@@ -1286,4 +1342,65 @@ nav {
           flex-direction: column;
         }
         /*COUNTDOWN - COUNTDOWN*/
+        /* MOON - MOON - MOON*/
+        .card-moon-interact {
+          width: 90%;
+        }
+
+        .card-moon-interact img {
+          width: 90%;
+        }
+
+        .card-gallery-nasa img {
+          width: 250px;
+          height: 250px;
+        } 
+        /*MARS - MARS - MARS*/
+.rover-section h2 {
+  font-size: var(--size-mobile-title);
+  text-align: center;
+  color: var(--main-text-color);
+}
+
+        .container-image-mars img {
+          object-position: center;
+        }
+
+        .container-rover-img {
+          width: 300px;
+          height: 300px;
+        }
+
+       .container-rover-img img {
+        width: 300px;
+        height: 300px;
+        
+       }
+
+
+  .container-rover-info {
+    flex-direction: column;
+    gap: 1em;
+  }
+
+ 
+  .container-input-user input,
+  #btnRoverMars {
+    width: 100%;
+  }
+
+  
+  .container-curiosity-image {
+    width: 100%;
+    height: auto;
+    padding: 0.5em;
+  }
+
+
+  .card-rover-image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    position: relative;
+  }
 }

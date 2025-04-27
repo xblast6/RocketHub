@@ -154,7 +154,7 @@ function sendReaction(id, type) {
     .then(reactions => {
         const countIndex = countdownArray.findIndex(countdown => countdown._id === id)
         if (countIndex > 0) {
-            countdownArray[index].reactions = reactions
+            countdownArray[countIndex].reactions = reactions
         }
         updatedView()
     })

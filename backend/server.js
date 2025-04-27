@@ -37,6 +37,7 @@ server.get('/countdowns/nextCountdown', nextCountdown);
 server.use('/rockets', rocketsRouter);
 server.use("/countdowns", countdownRouter);
 
+
 // Rotte protette
 server.use('/companies', verifyToken, isAdmin, companiesRouter);
 server.use('/upload', verifyToken, isAdmin, uploadRouter);

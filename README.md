@@ -17,4 +17,17 @@ Frontend
 Integrazione API Esterne
 📡 NASA Open APIs: Recupero di immagini suggestive, meteo spaziale in tempo reale e immagini direttamente da Marte.
 
+🔧 Funzioni di Amministrazione
+Gli utenti autenticati come amministratori hanno accesso esclusivo al pannello di backoffice, dove possono:
+📂 Modificare file e dati del backoffice.
+🛠️ Creare e gestire razzi, aziende associate e countdown.
+✏️ Aggiornare ogni singolo campo esistente nelle schede già presenti.
+🌎 Esperienza Utente
+
+Tutti gli utenti, anche non autenticati, possono esplorare il sito e consultare:
+📅 Lista completa dei prossimi countdown per lanci spaziali.
+🚀 Catalogo dettagliato dei razzi disponibili.
+🌕 Pagina informativa sulla Luna, con aggiornamenti storici e missioni future.
+🔴 Pagina dedicata a Marte, con immagini, aggiornamenti e dettagli sui rover attualmente attivi.
+
 🚀✨ Per Aspera Ad Astra ! 🌌💫
